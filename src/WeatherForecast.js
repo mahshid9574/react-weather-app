@@ -9,18 +9,18 @@ export default function WeatherForecast(props) {
 
   useEffect(() => {
     setLoaded(false);
-  }, [props.coordinates]);
+  }, [props.city]);
 
   function handleResponse(response) {
     setForecast(response.data.daily);
+    console.log(response.data.daily);
     setLoaded(true);
   }
 
   function load() {
-    let apiKey = "5dcce36908fe9d9a18c65f0508677f01";
-    let longitude = props.coordinates.lon;
-    let latitude = props.coordinates.lat;
-    let apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
+    const apiKey = "9tf03b4fo8340e2aa2343a0b77d0f221";
+    let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${props.city}&key=${apiKey}&units=metric`;
+    console.log(apiUrl);
     axios.get(apiUrl).then(handleResponse);
   }
 
@@ -44,7 +44,6 @@ export default function WeatherForecast(props) {
     );
   } else {
     load();
-
     return null;
   }
 }
